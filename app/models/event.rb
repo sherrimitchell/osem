@@ -223,6 +223,20 @@ class Event < ActiveRecord::Base
     (100 * result.values.count(true) / result.values.compact.count).to_s
   end
 
+  ##
+  #Returns the end time for an event
+  ##
+  def end_time
+    self.start_time + self.event_type.length.minutes
+  end
+
+  ##
+  #Checks if the event is the current event
+  ##
+  def is_current?
+    start_time <= DateTime.current &&  DateTime.current <= end_time
+  end
+  
   private
 
   ##

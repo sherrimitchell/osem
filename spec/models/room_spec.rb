@@ -23,4 +23,38 @@ describe Room do
       expect(subject.guid).to match regex_base64
     end
   end
+
+  describe 'current event' do
+    let!(:event) { create(:event, room: subject, start_time: DateTime.current)}
+    let!(:last_event) { create(:event, room: subject, start_time: DateTime.current - 1.hour) }
+    let!(:next_event) { create(:event, room: subject, start_time: DateTime.current + 1.hour) }
+
+
+      it 'returns false for the last event' do
+        expect(last_event.is_current?).to be_falsey
+      end
+
+      it 'returns false for the next event' do
+        expect(next_event.is_current?).to be_falsey
+      end
+
+      it 'returns true for the current event' do
+        expect(event.is_current?).to be_truthy
+      end
+
+      it 'returns an event that is currently going on' do
+        expect(subject.current_event.id).to eq event.id
+      end
+
+      it 'returns the next_event if there is no event currently going on' do
+        expect(subject.next_event.id).to eq next_event.id
+      end
+  
+    ### Todo: Copy this code into the room spec and use for the current event test
+  end
+
+  ## Todo:
+  ### No current event, returns nil
+  ### If there is  a current event, return the event
+  ### In the before block only create the current event in the block where I want it to be returned. Don't use the before block that I have as-is in the event test.
 end

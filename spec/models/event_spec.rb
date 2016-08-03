@@ -318,4 +318,37 @@ describe Event do
       expect(other_event.week).to eq 48
     end
   end
+
+  describe 'is current' do
+    let!(:room) { create(:room)}
+    let(:last_event) { create(:event, room: room) }
+    let(:next_event) { create(:event, room: room) }
+
+    before :each do
+      event.update_attributes(room_id: room.id)
+      event.update_attributes(start_time: DateTime.current)
+      last_event.update_attributes(start_time: DateTime.current - 1.hour)
+      next_event.update_attributes(start_time: DateTime.current + 1.hour)
+    end
+
+      it 'returns false for the last event' do
+        expect(last_event.is_current?).to be_falsey
+      end
+
+      it 'returns false for the next event' do
+        expect(next_event.is_current?).to be_falsey
+      end
+
+      it 'returns true for the current event' do
+        expect(event.is_current?).to be_truthy
+      end
+
+      it 'returns an event that is currently going on' do
+      expect(event.current_event).to eq event
+      end
+
+      it 'returns the next event if there is no event currently going on' do
+      expect(event.current_event).to eq []
+      end
+    end
 end
