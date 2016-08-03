@@ -247,6 +247,27 @@ class Event < ActiveRecord::Base
     event_schedules.find_by(schedule_id: program.selected_schedule_id).try(:start_time)
   end
 
+  ##
+  # Returns the duration of an event
+  ##
+  def duration
+    self.event_type.length.minutes
+  end
+
+  ##
+  #Returns the end time for an event
+  ##
+  def end_time
+    self.start_time + self.event_type.length.minutes
+  end
+
+  ##
+  #Checks if the event is the current event
+  ##
+  def is_current?
+    start_time <= DateTime.current &&  DateTime.current <= end_time
+  end
+
   private
 
   ##
