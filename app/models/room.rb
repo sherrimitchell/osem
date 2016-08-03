@@ -10,6 +10,18 @@ class Room < ActiveRecord::Base
 
   validates :size, numericality: { only_integer: true, greater_than: 0 }, allow_nil: true
 
+  def current_event
+    events.find { |e| e.is_current? }
+  end
+
+  def next_event
+    events.sort_by(&:start_time).find { |e| e.start_time > DateTime.current } 
+  end
+
+  def canceled_events
+    events.canceled
+  end
+
   private
 
   def generate_guid
