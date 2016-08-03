@@ -1,0 +1,76 @@
+
+.container
+%td.event{ style: "width: #{95 / @rooms.length}%; cursor:pointer", |
+           rowspan: span[room.id], |
+           role: "button" } |
+  %a.unstyled-link{href: url_for(conference_program_proposal_path(@conference.short_title, event[0].id))}
+    - if speaker = event[0].speakers.first
+      = image_tag speaker.gravatar_url, :class => "img-circle pull-right", |
+                                         :alt => speaker.name, |
+                                         :title => speaker.name, |
+                                         :style => "padding:8px;" |
+    %h5
+      %span.fa.fa-comment
+      = event[0].title
+      - unless event[0].subtitle.blank?
+        %span.schedule-subtitle
+          = event[0].subtitle
+    %span.schedule-speaker
+      %span.fa.fa-user
+      = speaker.name
+    - if event[0].track
+      %span.schedule-track
+        %span.fa.fa-road
+        %span.label{ style: "background-color: #{event[0].track.color}" }
+          = event[0].track.name
+        
+.container 
+.row
+  .col-md-12
+    .page-header
+      %h1 Sponsors
+      %p.text-muted
+        People supporting your conference
+- if @conference.sponsors.any?
+  .row
+    .col-md-12
+      %table.table.table-hover#sponsors
+        %thead
+          %th Logo
+          %th Name
+          %th Description
+          %th URL
+          %th Level
+          %th Actions
+        %tbody
+          - @conference.sponsors.each do |sponsor|
+            %tr
+              %td
+                = image_tag(sponsor.picture.thumb.url, width: '20%')
+              %td
+                = sponsor.name
+              %td
+                = truncate(sponsor.description)
+              %td
+                = sponsor.website_url
+              %td
+                = sponsor.sponsorship_level.title
+  
+.container
+.row
+  .col-md-12.text-center
+    - unless @conference.contact.facebook.blank?
+      = link_to "#{ @conference.contact.facebook }" do
+        %i.fa.fa-facebook-square.fa-4x
+    - unless @conference.contact.twitter.blank?
+      = link_to "#{ @conference.contact.twitter }" do
+        %i.fa.fa-twitter.fa-4x
+    - unless @conference.contact.instagram.blank?
+      = link_to "#{ @conference.contact.instagram }" do
+        %i.fa.fa-instagram.fa-4x
+    - unless @conference.contact.googleplus.blank?
+      = link_to "#{ @conference.contact.googleplus }" do
+        %i.fa.fa-google-plus-square.fa-4x
+    - unless @conference.contact.email.blank?
+      = mail_to "#{ @conference.contact.email }" do
+        %i.fa.fa-envelope-o.fa-4x
