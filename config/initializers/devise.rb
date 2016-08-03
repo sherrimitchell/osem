@@ -264,12 +264,12 @@ Devise.setup do |config|
 
   # Activate the test mode, useful when no real iChain is present, like in
   # testing and development environments
-  # config.ichain_test_mode = true
+  config.ichain_test_mode = true
 
   # In test mode, you can skip asking for the user information by always
   # forcing the following username. The user will be permanently signed in.
-  # config.ichain_force_test_username = "testuser"
+  config.ichain_force_test_username = "testuser"
 
   # In test mode, force the following additional attributes
-  # config.ichain_force_test_attributes = {:email => "testuser@example.com"}
+  config.ichain_force_test_attributes = {:email => "testuser@example.com"}
 end
