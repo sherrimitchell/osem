@@ -1,0 +1,31 @@
+.container
+  .row
+    - if @event
+      #event-info
+        .row
+          .col-md-12.page-header.text-center
+            %h2= @event.title
+            %br
+            .small.text-center= @event.subtitle
+        .row
+          .speakerinfo.text-center
+            .col-md-12.text-center
+              %h3
+                by
+                = @event.speaker_names
+        .row
+          .col-md-12.text-center
+            %dl
+            .col-md-12.text-center
+            %dt
+              Event Starts:
+              %dd= @event.start_time.strftime("%Y %B %e %H:%M")
+        - if @event.canceled?
+          %h3
+            (canceled)
+        #conference-tweets.row
+          / Todo: Add tweet logic
+        #conference-sponsors
+          - if @conference.sponsors.any?
+            %section#sponsors
+              = render 'conference/sponsors'
