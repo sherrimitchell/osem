@@ -1,5 +1,5 @@
 module Admin
-  class RoomEventPagesController < Admin::BaseController
+  class RoomEventsController < Admin::BaseController
     load_and_authorize_resource :conference, find_by: :short_title
     load_and_authorize_resource :program, through: :conference, singleton: true
     load_resource :venue, through: :conference, singleton: true
