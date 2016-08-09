@@ -255,19 +255,26 @@ class Event < ActiveRecord::Base
   end
 
   ##
-  #Returns the end time for an event
+  # Returns the end time for an event
   ##
   def end_time
     self.start_time + self.event_type.length.minutes
   end
 
   ##
-  #Checks if the event is the current event
+  # Checks if the event is the current event
   ##
   def is_current?
     start_time <= DateTime.current &&  DateTime.current <= end_time
   end
-
+  
+  ##
+  # Checks if the event is cancelled
+  ##
+  def is_canceled?
+    state == :canceled
+  end
+  
   private
 
   ##
