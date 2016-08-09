@@ -342,13 +342,5 @@ describe Event do
       it 'returns true for the current event' do
         expect(event.is_current?).to be_truthy
       end
-
-      it 'returns an event that is currently going on' do
-      expect(event.current_event).to eq event
-      end
-
-      it 'returns the next event if there is no event currently going on' do
-      expect(event.current_event).to eq []
-      end
     end
-end
+  end
