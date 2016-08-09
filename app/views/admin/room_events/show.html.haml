@@ -1,1 +1,69 @@
-= render partial: 'admin/room_events/room_event'
+.container
+  .row
+    - if @event
+      - if @event.is_current?
+        #current-event-info
+          .col-md-12.page-header.text-center
+            %h2= @event.title
+            %br
+            .small.text-center= @event.subtitle
+        .row
+          .col-md-12
+            .speakerinfo
+              .col-md-12.text-center
+                %h3
+                  by
+                  = @event.speaker_names
+      - else
+        - if !@event.is_canceled?
+        #next-event-info
+          .col-md-12.page-header.text-center
+            %h2= @event.title
+            %br
+            .small.text-center= @event.subtitle
+        .row
+          .col-md-12
+            .speakerinfo
+              .col-md-12.text-center
+                %h3
+                  by
+                  = @event.speaker_names
+        .row
+          .col-md-12
+            %dl
+              .col-md-12.text-center
+                %dt
+                  Next Event Starts:
+                %dd= @event.start_time.strftime("%Y %B %e %H:%M")
+        #conference-tweets.row
+          / Todo: Add tweet logic
+        #conference-sponsors
+          - if @conference.sponsors.any?
+            %section#sponsors
+              = render 'conference/sponsors'
+        - else @event.is_canceled?
+        #canceled-event-info
+          .col-md-12.page-header.text-center
+            %h2= @event.title
+            %br
+            .small.text-center= @event.subtitle
+        .row
+          .col-md-12
+            .speakerinfo
+              .col-md-12.text-center
+                %h3
+                  by
+                  = @event.speaker_names
+        .row
+          .col-md-12
+            %dl
+              .col-md-12.text-center
+                %dt
+                  Next Event Starts:
+                %dd= @event.start_time.strftime("%Y %B %e %H:%M")
+        #conference-tweets.row
+          / Todo: Add tweet logic
+        #conference-sponsors
+          - if @conference.sponsors.any?
+            %section#sponsors
+              = render 'conference/sponsors'

@@ -7,18 +7,28 @@ module Admin
     load_and_authorize_resource :room
     load_and_authorize_resource :event, through: :room
 
-    before_action :get_room
+    before_action :get_room, only: [:show]
+    before_action :get_all_rooms, only: [:index]
+
+    def index
+    end
 
     def show
       @event = @room.current_event || @room.next_event
     end
 
-## Todo: Create a page that displays when no events are available
+## Todo: 
+# If an event is cancelled, then display the event on the screen
+# If no events are scheduled in a room after the current event, then display conference-wide screen
 
     private
 
     def get_room
       @room = Room.find(params[:id])
+    end
+
+    def get_all_rooms
+      @rooms = @venue.rooms
     end
   end
 end
