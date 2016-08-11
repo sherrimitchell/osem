@@ -16,7 +16,11 @@ class Room < ActiveRecord::Base
   end
 
   def next_event
-    events.sort_by(&:start_time).find { |e| e.start_time > DateTime.current } 
+    events.sort_by(&:start_time).find { |e| e.start_time > DateTime.current }
+  end
+
+  def canceled_event
+      events.find { |e| e.is_canceled? }
   end
 
   def canceled_events

@@ -39,7 +39,7 @@ describe Room do
       end
 
       it 'returns the canceled event if there is no event currently going on and the next_event is canceled' do
-      expect(subject.canceled_event.id).to eq canceled_event.id
-    end
+        expect(subject.canceled_event.id).to eq canceled_event.id
+      end
   end
 end
