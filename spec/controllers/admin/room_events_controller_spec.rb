@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Admin::RoomEventPagesController do
   let!(:admin) { create(:admin) }
-  let!(:conference) { create(:conference, short_title: "testconf") }
+  let!(:conference) { create(:conference, short_title: 'testconf') }
   let!(:venue) { create(:venue, conference: conference) }
   let!(:program) { create(:program, conference: conference) }
   let!(:room) { create(:room, venue: venue, size: 4) }
@@ -12,10 +12,10 @@ describe Admin::RoomEventPagesController do
 
   context 'admin is signed in' do
     before { sign_in admin }
-## Create a next and last event in before
-## Add a new test that says you get a next event if there is no current event
+##  Create a next and last event in before
+##  Add a new test that says you get a next event if there is no current event
     describe 'GET #show' do
-      before { get :show, id: room.id, conference_id: "testconf" }
+      before { get :show, id: room.id, conference_id: 'testconf' }
 
       it 'assigns conference, venue and rooms variables' do
         expect(assigns(:conference)).to eq conference
@@ -32,27 +32,19 @@ describe Admin::RoomEventPagesController do
         expect(room.current_event.id).to eq event.id
       end
       it 'returns true for the current event' do
-        expect(event.is_current?).to be_truthy
+        expect(event.current?).to be_truthy
       end
       ## next event
       it 'returns false for the next event' do
-        expect(next_event.is_current?).to be_falsey
+        expect(next_event.current?).to be_falsey
       end
       it 'returns the next_event if there is no event currently going on' do
         expect(room.next_event.id).to eq next_event.id
       end
       ## last event
       it 'returns false for the last event' do
-        expect(last_event.is_current?).to be_falsey
+        expect(last_event.current?).to be_falsey
       end
     end
   end
 end
-
-      
-
-      
-
-      
-
-      

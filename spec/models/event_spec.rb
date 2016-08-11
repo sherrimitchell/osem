@@ -340,16 +340,16 @@ describe Event do
       next_event.update_attributes(start_time: DateTime.current + 1.hour)
     end
 
-      it 'returns false for the next event' do
-        expect(next_event.is_current?).to be_falsey
-      end
+    it 'returns false for the next event' do
+      expect(next_event.current?).to be_falsey
+    end
 
-      it 'returns false for the canceled event' do
-        expect(event.is_canceled?).to be_falsey
-      end
+    it 'returns false for the canceled event' do
+      expect(event.canceled?).to be_falsey
+    end
 
-      it 'returns true for the current event' do
-        expect(event.is_current?).to be_truthy
-      end
+    it 'returns true for the current event' do
+      expect(event.current?).to be_truthy
     end
   end
+end
