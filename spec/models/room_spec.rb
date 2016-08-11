@@ -28,6 +28,7 @@ describe Room do
     let!(:event) { create(:event, room: subject, start_time: DateTime.current)}
     let!(:last_event) { create(:event, room: subject, start_time: DateTime.current - 1.hour) }
     let!(:next_event) { create(:event, room: subject, start_time: DateTime.current + 1.hour) }
+    let!(:canceled_event) {create(:event, room: subject, start_time: DateTime.current + 1.hour, state: 'canceled')}
 
 
       it 'returns an event that is currently going on' do
@@ -36,6 +37,10 @@ describe Room do
 
       it 'returns the next_event if there is no event currently going on' do
         expect(subject.next_event.id).to eq next_event.id
+      end
+
+      it 'returns the canceled event if there is no event currently going on and the next_event is canceled' do
+        expect(subject.canceled_event.id).to eq canceled_event.id
       end
   end
 end

@@ -14,8 +14,8 @@
                 %h3
                   by
                   = @event.speaker_names
-      - else
-        - if !@event.is_canceled?
+      - elsif
+        - if !@event.next_event?
         #next-event-info
           .col-md-12.page-header.text-center
             %h2= @event.title
@@ -41,8 +41,10 @@
           - if @conference.sponsors.any?
             %section#sponsors
               = render 'conference/sponsors'
-        - else @event.is_canceled?
-        #canceled-event-info
+        = link_to 
+      - else
+        - if @event.canceled_event?
+        #next-event-info
           .col-md-12.page-header.text-center
             %h2= @event.title
             %br
@@ -67,3 +69,4 @@
           - if @conference.sponsors.any?
             %section#sponsors
               = render 'conference/sponsors'
+        = link_to
