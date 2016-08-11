@@ -269,12 +269,12 @@ class Event < ActiveRecord::Base
   end
   
   ##
-  # Checks if the event is cancelled
+  # Checks if the event is canceled
   ##
   def is_canceled?
-    state == :canceled
+    !self.is_current? && self.canceled?
   end
-  
+
   private
 
   ##
