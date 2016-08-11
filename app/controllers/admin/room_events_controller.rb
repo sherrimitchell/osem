@@ -15,20 +15,25 @@ module Admin
 
     def show
       @event = @room.current_event || @room.next_event || @room.canceled_event
+
+      respond_to do |format|
+        format.html { render layout: 'room_events'}
+        # format.js  { render action: 'osem-update-room-events'}
+      end
     end
 
-## Todo: 
-# If an event is cancelled, then display the event on the screen
-# If no events are scheduled in a room after the current event, then display conference-wide screen
-# Add page refresh
+## Todo:
+    #  If an event is cancelled, then display the event on the screen
+    #  If no events are scheduled in a room after the current event, then display conference-wide screen
+    #  Add page refresh
 
     private
 
-    def get_room
+    def room
       @room = Room.find(params[:id])
     end
 
-    def get_all_rooms
+    def rooms
       @rooms = @venue.rooms
     end
   end

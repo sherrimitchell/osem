@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <% if @event %>
-      <% if @event.is_current? %>
+      <% if @event.current? %>
       <div id="current-event-info">
         <div class="col-md-12 page-header text-center">
           <h2><%= @event.title %></h2>
