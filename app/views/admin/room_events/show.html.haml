@@ -1,9 +1,8 @@
 .container
   .row
     - if @event
-      #event-info
-        .row
-          .col-md-12.page-header.text-center
+      .row#event-info
+        .col-md-12.page-header.text-center
             %h2= @event.title
             %br
             .small.text-center= @event.subtitle
@@ -21,7 +20,7 @@
               Event Starts:
               %dd= @event.start_time.strftime("%Y %B %e %H:%M")
         - if @event.canceled?
-          %h3
+          %h3#event-canceled
             (canceled)
         #conference-tweets.row
           / Todo: Add tweet logic
@@ -29,3 +28,4 @@
           - if @conference.sponsors.any?
             %section#sponsors
               = render 'conference/sponsors'
+        = link_to

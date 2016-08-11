@@ -28,6 +28,7 @@ module Admin
 ## Todo: 
 # If an event is cancelled, then display the event on the screen
 # If no events are scheduled in a room after the current event, then display conference-wide screen
+# Add page refresh
 
     private
 

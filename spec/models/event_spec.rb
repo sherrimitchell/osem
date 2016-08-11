@@ -349,7 +349,7 @@ describe Event do
     end
 
     it 'returns true for the current event' do
-      expect(event.current?).to be_truthy
+        expect(event.is_current?).to be_truthy
     end
   end
 end
