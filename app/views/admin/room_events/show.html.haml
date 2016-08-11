@@ -1,7 +1,7 @@
 .container
   .row
     - if @event
-      - if @event.is_current?
+      - if @event.current?
         #current-event-info
           .col-md-12.page-header.text-center
             %h2= @event.title

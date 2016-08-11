@@ -11,7 +11,7 @@ class Room < ActiveRecord::Base
   validates :size, numericality: { only_integer: true, greater_than: 0 }, allow_nil: true
 
   def current_event
-    events.find { |e| e.is_current? }
+    events.find(&:current?)
   end
 
   def next_event
@@ -19,7 +19,7 @@ class Room < ActiveRecord::Base
   end
 
   def canceled_event
-      events.find { |e| e.is_canceled? }
+    events.find(&:canceled?)
   end
 
   def canceled_events
