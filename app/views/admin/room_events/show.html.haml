@@ -3,9 +3,9 @@
     - if @event
       .row#event-info
         .col-md-12.page-header.text-center
-            %h2= @event.title
-            %br
-            .small.text-center= @event.subtitle
+          %h2= @event.title
+          %br
+          .small.text-center= @event.subtitle
         .row
           .speakerinfo.text-center
             .col-md-12.text-center
@@ -28,4 +28,3 @@
           - if @conference.sponsors.any?
             %section#sponsors
               = render 'conference/sponsors'
-        = link_to

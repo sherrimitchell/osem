@@ -20,7 +20,7 @@ class Room < ActiveRecord::Base
   end
 
   def canceled_event
-    events.find { |e| e.is_canceled? }
+    events.find(&:canceled?)
   end
 
   private

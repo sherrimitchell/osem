@@ -348,8 +348,17 @@ describe Event do
       expect(event.canceled?).to be_falsey
     end
 
+<<<<<<< ours
     it 'returns true for the current event' do
         expect(event.is_current?).to be_truthy
+||||||| base
+      it 'returns true for the current event' do
+        expect(event.is_current?).to be_truthy
+      end
+=======
+    it 'returns true for the current event' do
+      expect(event.current?).to be_truthy
+>>>>>>> theirs
     end
   end
 end
