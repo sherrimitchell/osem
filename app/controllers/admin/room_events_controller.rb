@@ -21,12 +21,11 @@ module Admin
       else
         respond_to do |format|
         format.html { render layout: 'room_events'}
-        # format.js  { render action: 'osem-update-room-events'}   
+        # format.js  { render action: 'osem-update-room-events'}      
         end
       end
     end
 ## Todo:
-    #  If an event is cancelled, then display the event on the screen
     #  If no events are scheduled in a room after the current event, then display conference-wide screen
     #  Add page refresh
 

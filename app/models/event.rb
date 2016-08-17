@@ -231,7 +231,7 @@ class Event < ActiveRecord::Base
     (100 * result.values.count(true) / result.values.compact.count).to_s
   end
 
-  ##
+  ##s
   # Returns the room in which the event is scheduled
   #
   def room
@@ -253,7 +253,7 @@ class Event < ActiveRecord::Base
   def duration
     self.event_type.length.minutes
   end
-
+  
   ##
   # Returns the end time for an event
   ##
@@ -266,13 +266,6 @@ class Event < ActiveRecord::Base
   ##
   def current?
     start_time <= DateTime.current &&  DateTime.current <= end_time
-  end
-
-  ##
-  # Checks if the event is canceled
-  ##
-  def canceled?
-    !self.current? && self.canceled?
   end
 
   private
