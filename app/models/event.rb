@@ -267,7 +267,7 @@ class Event < ActiveRecord::Base
   def current?
     start_time <= DateTime.current &&  DateTime.current <= end_time
   end
-  
+
   ##
   # Checks if the event is canceled
   ##

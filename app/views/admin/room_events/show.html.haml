@@ -1,72 +1,31 @@
 .container
   .row
     - if @event
-      - if @event.current?
-        #current-event-info
+      #event-info
+        .row
           .col-md-12.page-header.text-center
             %h2= @event.title
             %br
             .small.text-center= @event.subtitle
         .row
-          .col-md-12
-            .speakerinfo
-              .col-md-12.text-center
-                %h3
-                  by
-                  = @event.speaker_names
-      - elsif
-        - if !@event.next_event?
-        #next-event-info
-          .col-md-12.page-header.text-center
-            %h2= @event.title
-            %br
-            .small.text-center= @event.subtitle
+          .speakerinfo.text-center
+            .col-md-12.text-center
+              %h3
+                by
+                = @event.speaker_names
         .row
-          .col-md-12
-            .speakerinfo
-              .col-md-12.text-center
-                %h3
-                  by
-                  = @event.speaker_names
-        .row
-          .col-md-12
+          .col-md-12.text-center
             %dl
-              .col-md-12.text-center
-                %dt
-                  Next Event Starts:
-                %dd= @event.start_time.strftime("%Y %B %e %H:%M")
+            .col-md-12.text-center
+            %dt
+              Event Starts:
+              %dd= @event.start_time.strftime("%Y %B %e %H:%M")
+        - if @event.canceled?
+          %h3
+            (canceled)
         #conference-tweets.row
           / Todo: Add tweet logic
         #conference-sponsors
           - if @conference.sponsors.any?
             %section#sponsors
               = render 'conference/sponsors'
-        = link_to 
-      - else
-        - if @event.canceled_event?
-        #next-event-info
-          .col-md-12.page-header.text-center
-            %h2= @event.title
-            %br
-            .small.text-center= @event.subtitle
-        .row
-          .col-md-12
-            .speakerinfo
-              .col-md-12.text-center
-                %h3
-                  by
-                  = @event.speaker_names
-        .row
-          .col-md-12
-            %dl
-              .col-md-12.text-center
-                %dt
-                  Next Event Starts:
-                %dd= @event.start_time.strftime("%Y %B %e %H:%M")
-        #conference-tweets.row
-          / Todo: Add tweet logic
-        #conference-sponsors
-          - if @conference.sponsors.any?
-            %section#sponsors
-              = render 'conference/sponsors'
-        = link_to
