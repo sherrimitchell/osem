@@ -1,14 +1,14 @@
 /** 
 * Will call osem_update_room_events at the end of the current event
 **/
-
-$document.ready(function () {
-  if ($('#current-event-info').length > 0) {
+$(function () {
+  var 
+  if ($('#current-event').length > 0) {
     setInterval(updateRoomEvents, 10000);
   }
 });
 
-function updateComments() {
+function updateRoomEvents() {
   var article_id = $('#article').attr('data-id');
   if ($('.comment').length > 0) {
     var after = $('.comment:last').attr('data-time');

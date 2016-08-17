@@ -7,23 +7,26 @@ module Admin
     load_and_authorize_resource :room
     load_and_authorize_resource :event, through: :room
 
-    before_action :get_room, only: [:show]
-    before_action :get_all_rooms, only: [:index]
+    before_action :room, only: [:show]
+    before_action :rooms, only: [:index]
 
     def index
     end
 
     def show
-      @event = @room.current_event || @room.next_event || @room.canceled_event
-
-      respond_to do |format|
+      @event = @room.current_event || @room.next_event
+      if @event.nil?
+        render json: { message: 'No event available. This is a temporary measure until I can get the rest of the code I need.' },
+        status: :unprocessable_entity
+      else
+        respond_to do |format|
         format.html { render layout: 'room_events'}
-        # format.js  { render action: 'osem-update-room-events'}
+        format.js  { render action: 'osem-update-room-events'}   
+        end
       end
     end
 
 ## Todo:
-    #  If an event is cancelled, then display the event on the screen
     #  If no events are scheduled in a room after the current event, then display conference-wide screen
     #  Add page refresh
 

@@ -18,7 +18,7 @@ class Event < ActiveRecord::Base
   has_many :registrations, through: :events_registrations
 
   belongs_to :track
-  belongs_to :room
+  belongs_to :roomtg  
   belongs_to :difficulty_level
   belongs_to :program
 
@@ -38,6 +38,7 @@ class Event < ActiveRecord::Base
   validate :max_attendees_no_more_than_room_size
 
   scope :confirmed, -> { where(state: 'confirmed') }
+  scope :canceled, -> { where(state: 'canceled') }
   scope :highlighted, -> { where(is_highlight: true) }
 
   state_machine initial: :new do
@@ -224,6 +225,13 @@ class Event < ActiveRecord::Base
   end
 
   ##
+  # Returns the duration of an event
+  ##
+  def duration
+    self.event_type.length.minutes
+  end
+  
+  ##
   # Returns the end time for an event
   ##
   def end_time
@@ -235,13 +243,6 @@ class Event < ActiveRecord::Base
   ##
   def current?
     start_time <= DateTime.current &&  DateTime.current <= end_time
-  end
-
-  ##
-  # Checks if the event is canceled
-  ##
-  def canceled?
-    !self.current? && self.canceled?
   end
 
   private
