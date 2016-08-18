@@ -23,10 +23,6 @@ class Room < ActiveRecord::Base
     events.canceled
   end
 
-  def canceled_events
-    events.canceled
-  end
-
   private
 
   def generate_guid
