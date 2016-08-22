@@ -1,4 +1,3 @@
-<<<<<<< ours
 /** 
 * Will call osem_update_room_events at the end of the current event
 **/

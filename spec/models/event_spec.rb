@@ -327,6 +327,7 @@ describe Event do
       expect(other_event.week).to eq 48
     end
   end
+<<<<<<< HEAD
 
   describe 'is current' do
     let!(:room) { create(:room)}
@@ -361,4 +362,32 @@ describe Event do
 >>>>>>> theirs
     end
   end
+||||||| merged common ancestors
+=======
+
+  describe 'is current' do
+    let!(:room) { create(:room)}
+    let(:last_event) { create(:event, room: room) }
+    let(:next_event) { create(:event, room: room) }
+
+    before :each do
+      event.update_attributes(room_id: room.id)
+      event.update_attributes(start_time: DateTime.current)
+      last_event.update_attributes(start_time: DateTime.current - 1.hour)
+      next_event.update_attributes(start_time: DateTime.current + 1.hour)
+    end
+
+    it 'returns false for the next event' do
+      expect(next_event.current?).to be_falsey
+    end
+
+    it 'returns false for the canceled event' do
+      expect(event.canceled?).to be_falsey
+    end
+
+    it 'returns true for the current event' do
+      expect(event.current?).to be_truthy
+    end
+  end
+>>>>>>> 74221e7413f81e2cfbe9c49177e9f39715226d34
 end
