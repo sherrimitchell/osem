@@ -45,6 +45,8 @@
             %b Difficulty
           %th
             %b State
+          %th 
+            %span.fa.fa-comment
         - @events.each do |event|
           %tr
             %td
@@ -158,3 +160,6 @@
                     %span.caret
                   %ul.dropdown-menu{:role=>"menu"}
                     = render 'change_state_dropdown', event: event
+            %td
+              = link_to "#{event.comment_threads.count}", admin_conference_program_event_path(@conference.short_title, event), anchor: 'comments-div'
+
