@@ -28,4 +28,23 @@ class EventSchedule < ActiveRecord::Base
   def intersecting_events
     room.event_schedules.where(start_time: start_time, schedule: schedule).where.not(id: id)
   end
+
+  def current?
+    self.schedule_id == program.selected_schedule.id
+  end
+
+  def event_current?
+    start_time == DateTime.current && start_time < end_time
+  end
+    ##
+    # start_time <= current_time 
+    
+    # a current event is confirmed or canceled
+    # end_time > start_time
+    # event_schedule - if schedule.program.selected_schedule.id == schedule.id
+    # 
+  
 end
+
+
+# if schedule.program.selected_schedule == schedule //then our event schedule is in the selected schedule

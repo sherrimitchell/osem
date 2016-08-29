@@ -203,7 +203,7 @@ describe Event do
 
     it 'returns true when the event has votes by that user' do
       create(:vote, user: user, event: event)
-      expect(event.voted?(user)).to eq true
+      expect(event.voted?(user)).to eq true 
     end
   end
 
@@ -327,51 +327,14 @@ describe Event do
       expect(other_event.week).to eq 48
     end
   end
-<<<<<<< HEAD
 
   describe 'is current' do
-    let!(:room) { create(:room)}
+    let(:event) { create(:event, program: conference.program) }
     let(:last_event) { create(:event, room: room) }
     let(:next_event) { create(:event, room: room) }
 
     before :each do
-      event.update_attributes(room_id: room.id)
-      event.update_attributes(start_time: DateTime.current)
-      last_event.update_attributes(start_time: DateTime.current - 1.hour)
-      next_event.update_attributes(start_time: DateTime.current + 1.hour)
-    end
-
-    it 'returns false for the next event' do
-      expect(next_event.current?).to be_falsey
-    end
-
-    it 'returns false for the canceled event' do
-      expect(event.canceled?).to be_falsey
-    end
-
-<<<<<<< ours
-    it 'returns true for the current event' do
-        expect(event.is_current?).to be_truthy
-||||||| base
-      it 'returns true for the current event' do
-        expect(event.is_current?).to be_truthy
-      end
-=======
-    it 'returns true for the current event' do
-      expect(event.current?).to be_truthy
->>>>>>> theirs
-    end
-  end
-||||||| merged common ancestors
-=======
-
-  describe 'is current' do
-    let!(:room) { create(:room)}
-    let(:last_event) { create(:event, room: room) }
-    let(:next_event) { create(:event, room: room) }
-
-    before :each do
-      event.update_attributes(room_id: room.id)
+      event.update_attributes(event_id: event.id)
       event.update_attributes(start_time: DateTime.current)
       last_event.update_attributes(start_time: DateTime.current - 1.hour)
       next_event.update_attributes(start_time: DateTime.current + 1.hour)
@@ -386,8 +349,7 @@ describe Event do
     end
 
     it 'returns true for the current event' do
-      expect(event.current?).to be_truthy
+        expect(event.is_current?).to be_truthy
     end
   end
->>>>>>> 74221e7413f81e2cfbe9c49177e9f39715226d34
 end
