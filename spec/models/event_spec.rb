@@ -320,36 +320,11 @@ describe Event do
   end
 
   describe '#set_week' do
-    it 'sets correct week number' do
-      conference = create(:conference, start_date: Date.new(2015, 12, 1), end_date: Date.new(2015, 12, 1))
-      other_event = create(:event, created_at: Date.new(2015, 12, 1), program: conference.program)
+      it 'sets correct week number' do
+        conference = create(:conference, start_date: Date.new(2015, 12, 1), end_date: Date.new(2015, 12, 1))
+        other_event = create(:event, created_at: Date.new(2015, 12, 1), program: conference.program)
 
-      expect(other_event.week).to eq 48
-    end
-  end
-
-  describe 'is current' do
-    let!(:room) { create(:room)}
-    let(:last_event) { create(:event, room: room) }
-    let(:next_event) { create(:event, room: room) }
-
-    before :each do
-      event.update_attributes(room_id: room.id)
-      event.update_attributes(start_time: DateTime.current)
-      last_event.update_attributes(start_time: DateTime.current - 1.hour)
-      next_event.update_attributes(start_time: DateTime.current + 1.hour)
-    end
-
-      it 'returns false for the last event' do
-        expect(last_event.is_current?).to be_falsey
-      end
-
-      it 'returns false for the next event' do
-        expect(next_event.is_current?).to be_falsey
-      end
-
-      it 'returns true for the current event' do
-        expect(event.is_current?).to be_truthy
+        expect(other_event.week).to eq 48
       end
     end
   end
