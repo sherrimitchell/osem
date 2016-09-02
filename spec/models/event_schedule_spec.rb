@@ -6,8 +6,10 @@ describe EventSchedule do
   let(:program) { create(:program) }
   let(:schedule) { create(:schedule) }
   let(:event) { create(:event) }
+  let(:new_event) { create(:event) }
   let(:room) { create(:room) }
   let(:event_schedule) { create(:event_schedule, program: conference.program.selected_schedule.event_schedule) }
+  let(:event_schedule) { create()}
 
   describe 'association' do
     it { should belong_to(:schedule) }
@@ -27,6 +29,12 @@ describe EventSchedule do
   end
 
   describe '#current?' do
+    before :each do
+      event.update_attributes(event_id: event.id)
+      event.update_attributes(start_time: DateTime.current)
+      last_event.update_attributes(start_time: DateTime.current - 1.hour)
+      next_event.update_attributes(start_time: DateTime.current + 1.hour)
+    end
     context 'self.current?'
     it 'returns true for the current event_schedule' do
       expect(subject.current?).to be_truthy

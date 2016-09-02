@@ -29,22 +29,41 @@ class EventSchedule < ActiveRecord::Base
     room.event_schedules.where(start_time: start_time, schedule: schedule).where.not(id: id)
   end
 
-  def current?
-    self.schedule_id == program.selected_schedule.id
-  end
+  ##
+  # Checks if the event is the current event
+  ##
+  def current
+    @event_schedules = @schedule.event_schedules
+    @event_schedule = @event_schedules.find(params[:id])
+    if @event_schedule.id == @schedule.program.selected_schedule_id
+      true
+    else
+      false
 
-  def event_current?
-    start_time == DateTime.current && start_time < end_time
+      
+        event_schedule = @event_schedule
+    if event_schedule.start_time <= DateTime.current && DateTime.current <= event_schedule.end_time
+      true
+    else
+      false
+    end
   end
-    ##
-    # start_time <= current_time 
+  end
     
+
     # a current event is confirmed or canceled
     # end_time > start_time
     # event_schedule - if schedule.program.selected_schedule.id == schedule.id
     # 
   
 end
-
-
+# current event schedule
+# if event schedule has the same 
+# EventScheduleId
+#   start time
+# as
+# @schedule.program.selected_schedule.event_schedules
+#   EventScheduleId
+#   start time
+# EventSchedule.where('schedule_id = ?', @schedule.program.selected_schedule_id)
 # if schedule.program.selected_schedule == schedule //then our event schedule is in the selected schedule

@@ -264,9 +264,9 @@ class Event < ActiveRecord::Base
   ##
   # Checks if the event is the current event
   ##
-  def current?
-    start_time <= DateTime.current &&  DateTime.current <= end_time
-  end
+  # def current?
+  #   start_time <= DateTime.current &&  DateTime.current <= end_time
+  # end
 
   private
 

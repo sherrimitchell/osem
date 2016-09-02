@@ -11,6 +11,10 @@ class Room < ActiveRecord::Base
 
   validates :size, numericality: { only_integer: true, greater_than: 0 }, allow_nil: true
 
+  def scheduled_events
+    
+  end
+
   def current_event
     events.find(&:current?)
   end
