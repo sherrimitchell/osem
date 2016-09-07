@@ -320,11 +320,11 @@ describe Event do
   end
 
   describe '#set_week' do
-    it 'sets correct week number' do
-      conference = create(:conference, start_date: Date.new(2015, 12, 1), end_date: Date.new(2015, 12, 1))
-      other_event = create(:event, created_at: Date.new(2015, 12, 1), program: conference.program)
+      it 'sets correct week number' do
+        conference = create(:conference, start_date: Date.new(2015, 12, 1), end_date: Date.new(2015, 12, 1))
+        other_event = create(:event, created_at: Date.new(2015, 12, 1), program: conference.program)
 
-      expect(other_event.week).to eq 48
+        expect(other_event.week).to eq 48
+      end
     end
   end
-end
