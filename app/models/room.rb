@@ -1,6 +1,4 @@
 class Room < ActiveRecord::Base
-  belongs_to :venue
-
   has_many :event_schedules, dependent: :nullify
 
   has_paper_trail ignore: [:guid], meta: { conference_id: :conference_id }
